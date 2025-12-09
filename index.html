@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Ana Silva | Advocacia Especializada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIÁVEIS E RESET --- */
+        :root {
+            --primary-color: #0f172a; /* Azul Escuro Profundo */
+            --secondary-color: #c5a059; /* Dourado Elegante */
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Menu Mobile Hamburguer */
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.8s;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: var(--transition);
+            border: 2px solid var(--secondary-color);
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 1.1s;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--secondary-color);
+        }
+
+        /* --- SECTIONS GERAIS --- */
+        section {
+            padding: 5rem 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- SOBRE --- */
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 15px 15px 0px var(--secondary-color);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        /* --- ÁREAS DE ATUAÇÃO (CARDS) --- */
+        .services {
+            background-color: #fff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* --- CONTATO --- */
+        .contact {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: var(--secondary-color);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0f1c;
+            color: #8892b0;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- BOTÃO WHATSAPP FLUTUANTE --- */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Classe para JS Scroll Animation */
+        .hidden-el {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .show-el {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0px;
+                height: 92vh;
+                top: 8vh;
+                background-color: var(--primary-color);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                width: 60%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+            }
+
+            .nav-links.active {
+                transform: translateX(0%);
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Dra. Ana Silva</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#areas">Atuação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Justiça com Excelência</h1>
+        <p>Defendendo seus direitos com ética, estratégia e dedicação inabalável.</p>
+        <a href="https://wa.me/5511999999999?text=Olá, gostaria de agendar uma consulta." class="btn" target="_blank">
+            Agendar Consulta
+        </a>
+    </section>
+
+    <section id="sobre">
+        <div class="section-title hidden-el">
+            <h2>Sobre a Advogada</h2>
+        </div>
+        <div class="about-container">
+            <div class="about-img hidden-el">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Advogada no escritório">
+            </div>
+            <div class="about-text hidden-el">
+                <h3>Compromisso e Experiência</h3>
+                <p>Com mais de 10 anos de atuação, a Dra. Ana Silva construiu uma carreira sólida pautada na defesa intransigente dos interesses de seus clientes. Graduada pela Universidade de Direito e especialista em Direito Civil e Trabalhista.</p>
+                <br>
+                <p>Nosso escritório preza pelo atendimento humanizado e personalizado, entendendo que cada caso é único e merece uma estratégia exclusiva.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="services">
+        <div class="section-title hidden-el">
+            <h2>Áreas de Atuação</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card hidden-el">
+                <i class="fas fa-balance-scale"></i>
+                <h3>Direito Civil</h3>
+                <p>Atuação em contratos, responsabilidade civil, indenizações e direito do consumidor.</p>
+            </div>
+            <div class="service-card hidden-el">
+                <i class="fas fa-users"></i>
+                <h3>Direito de Família</h3>
+                <p>Divórcios, pensão alimentícia, guarda de menores e inventários com total sigilo.</p>
+            </div>
+            <div class="service-card hidden-el">
+                <i class="fas fa-briefcase"></i>
+                <h3>Direito Trabalhista</h3>
+                <p>Defesa dos direitos do trabalhador e assessoria jurídica preventiva para empresas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact">
+        <div class="section-title hidden-el">
+            <h2>Entre em Contato</h2>
+            <p style="color: #ccc;">Agende uma reunião para discutirmos o seu caso.</p>
+        </div>
+        <div class="contact-info hidden-el">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>(11) 99999-9999</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>contato@draanasilva.com.br</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Av. Paulista, 1000 - SP</span>
+            </div>
+        </div>
+        <br><br>
+        <a href="https://wa.me/5511999999999?text=Olá, vim pelo site e gostaria de atendimento." class="btn" target="_blank" style="margin-top: 20px;">
+            <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+        </a>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Dra. Ana Silva Advocacia. Todos os direitos reservados.</p>
+    </footer>
+
+    <a href="https://wa.me/5511999999999?text=Olá, preciso de ajuda jurídica." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Menu Mobile
+        const navSlide = () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            burger.addEventListener('click', () => {
+                // Toggle Nav
+                nav.classList.toggle('active');
+
+                // Animação do Burger
+                burger.classList.toggle('toggle');
+            });
+        }
+
+        navSlide();
+
+        // Animação ao rolar (Scroll Animation)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-el');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden-el');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
